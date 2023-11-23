@@ -3,7 +3,7 @@
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
-
+from models import storage_type
 
 class State(BaseModel, Base):
     """ State class """
@@ -15,6 +15,7 @@ class State(BaseModel, Base):
     if storage_type == 'db':
         cities = relationship(
             'City', cascade='all, delete-orphan', backref='state')
+
     # For FileStorage
     else:
         @property
