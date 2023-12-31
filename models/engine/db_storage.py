@@ -15,6 +15,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class DBStorage:
     """This class manages database storage for hbnb models."""
     __engine = None
@@ -43,7 +44,7 @@ class DBStorage:
 
         query_results = []
         if cls and cls in classes:
-                query_results = self.__session.query(cls).all()
+            query_results = self.__session.query(cls).all()
         else:
             for c in classes:
                 query_results.extend(self.__session.query(c).all())
@@ -74,3 +75,7 @@ class DBStorage:
             bind=self.__engine,
             expire_on_commit=False))
         self.__session = Session()
+
+    def close(self):
+        """Close the session."""
+        self.__session.close()
